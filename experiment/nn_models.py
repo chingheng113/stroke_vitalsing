@@ -104,7 +104,7 @@ for train_index, test_index in KFold(n_splits=10, random_state=42, shuffle=True)
     print('training complete')
 
     model.eval()
-    y_pred = model(test_xt)
+    y_pred = model(test_xt).cpu().data.numpy()
     fpr, tpr, thresholds = roc_curve(y_test, y_pred)
     auroc = auc(fpr, tpr)
     print('auc', auroc)
