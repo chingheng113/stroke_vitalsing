@@ -13,12 +13,13 @@ import matplotlib.pyplot as plt
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-print("Executing the model on :",device)
+print("Executing the model on :", device)
 
-ex_data = pd.read_csv(os.path.join('../..', 'data', 'ex_data.csv'))
+ex_data = pd.read_csv(os.path.join('..', '..', 'data', 'tidy_Stroke_Vital_Sign.csv'))
 
-ex_data['admin_date'] = ex_data['admin_date'].astype(int).astype(str)
-in_date = pd.to_datetime(ex_data['admin_date'], format='%Y/%m/%d', errors='coerce')
+ex_data['admission_date'] = ex_data['admission_date'].astype(int).astype(str)
+in_date = pd.to_datetime(ex_data['admission_date'], format='%Y/%m/%d', errors='coerce')
+
 
 ex_data['discharge_date'] = ex_data['discharge_date'].astype(int).astype(str)
 out_date = pd.to_datetime(ex_data['discharge_date'], format='%Y/%m/%d', errors='coerce')
@@ -27,15 +28,15 @@ day_diff = out_date - in_date
 ex_data['duration'] = day_diff.dt.days
 
 y_data = ex_data[['SurvivalWeeks']]
-X_data = ex_data.drop(['ID', 'CHT_NO', 'admin_date', 'discharge_date',
-                       'AllMortality', 'CVDeath  ', 'Death Date', 'SurvivalWeeks'], axis=1)
+X_data = ex_data.drop(['UID', 'Hospital_ID', 'admission_date', 'discharge_date',
+                       'Mortality', 'CVDeath', 'death_date', 'SurvivalWeeks'], axis=1)
 
-categorical_columns = ['Sex', 'AF', 'DM', 'HTN', 'Dyslipidemia', 'CHF', 'Smoking', 'Cancer before adm']
+categorical_columns = ['Sex', 'AF', 'DM', 'HTN', 'CHF', 'Smoking', 'Cancer before adm']
 numerical_columns = np.setdiff1d(X_data.columns, categorical_columns)
 
 # one-hot
 X_data_one_hot = pd.get_dummies(X_data, columns=categorical_columns)
-y_data_od = (y_data < 24).astype(int)
+y_data_od = (y_data < 4).astype(int)
 
 
 class DNN (nn.Module):
