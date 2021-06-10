@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sksurv.ensemble import RandomSurvivalForest
 import matplotlib.pyplot as plt
 
-data = pd.read_csv(os.path.join('..', '..', 'data', 'tidy_Stroke_Vital_Sign.csv'))
+data = pd.read_csv(os.path.join('../..', '..', 'data', 'tidy_Stroke_Vital_Sign.csv'))
 data_x = data.drop(['UID', 'Hospital_ID', 'SurvivalWeeks', 'admission_date',
                     'discharge_date', 'death_date', 'Mortality', 'CVDeath'], axis=1)
 categorical_ix = [0, 2, 3, 4, 5, 6, 7, 8, 15, 16, 17]

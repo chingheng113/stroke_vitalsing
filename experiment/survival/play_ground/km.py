@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from sksurv.nonparametric import kaplan_meier_estimator
 import os
 
-data = pd.read_csv(os.path.join('..', '..', 'data', 'tidy_Stroke_Vital_Sign.csv'))
+data = pd.read_csv(os.path.join('../..', '..', 'data', 'tidy_Stroke_Vital_Sign.csv'))
 data_x = data.drop(['UID', 'Hospital_ID', 'SurvivalWeeks', 'admission_date', 'discharge_date', 'death_date'], axis=1)
 # data_x = data[['Smoking']]
 data_y = data[['Mortality', 'SurvivalWeeks']]
