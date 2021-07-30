@@ -28,9 +28,9 @@ norm_vals = {
 test_data = datasets['test']
 
 # standardize
-train_data = utils.standardize_dataset(datasets['train'], norm_vals['mean'],                                           norm_vals['std'])
-valid_data = utils.standardize_dataset(datasets['valid'], norm_vals['mean'],                                           norm_vals['std'])
-test_data = utils.standardize_dataset(datasets['test'], norm_vals['mean'],                                            norm_vals['std'])
+train_data = utils.standardize_dataset(datasets['train'], norm_vals['mean'], norm_vals['std'])
+valid_data = utils.standardize_dataset(datasets['valid'], norm_vals['mean'], norm_vals['std'])
+test_data = utils.standardize_dataset(datasets['test'], norm_vals['mean'], norm_vals['std'])
 
 train_X = train_data['x']
 train_y = {'e': train_data['e'], 't': train_data['t']}
